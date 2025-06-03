@@ -11,10 +11,8 @@ enclave
         );
 
         // hello
-        HRESULT enclave_load_user_bound_key(
-            wstring keyName,
-            wstring flags,
-            wstring cache
+        HRESULT encrypt_snapshot(
+            vector<uint8_t> dataBlob,
         );
     };
 

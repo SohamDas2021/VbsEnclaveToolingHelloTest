@@ -10,22 +10,52 @@
 #include <VbsEnclave\Enclave\Implementations.h>
 #include "hello.vtl1.h"
 
-// call ins
-namespace veil_abi
+namespace veil::vtl1::implementation
 {
-    namespace VTL1_Declarations
+    void enclave_load_user_bound_key(const std::wstring& /*keyName*/, const std::wstring& /*flags*/, const std::wstring& /*cache*/)
     {
-        void enclave_load_user_bound_key(_In_ std::wstring keyName, _In_ std::wstring flags, _In_ std::wstring cache)
-        {
-            /*
-            NewClass::GetChallengeCallback();
+        /*
+        NewClass::GetChallengeCallback();
 
-            NewClass::CreateRecallKeyCallback(std::async a, std::promise p2, std::future f3);
+        BCryptGenerateRandomKeyPair();
 
-            NewClass::StorageCallback(sealEnc, pubECDH);
-            */
-        }
+        GetAttestationReport();
+
+        EnclaveEncryptDataForTrustlet();
+
+        // ******
+        // NCryptEncrypt x 3
+        // ******
+
+        NewClass::CreateRecallKeyCallback(std::async a, std::promise p2, std::future f3);
+
+        ECDH();
+
+        DeriveKEK();
+
+        EncryptWithKey();
+
+        Seal();
+
+        Newclass::StorageCallback(sealEnc, pubECDH);
+        */
     }
 }
 
+namespace veil_abi  
+{  
+   namespace VTL1_Declarations  
+   {
+       void encrypt_snapshot(_In_ std::vector<uint8_t> dataBlob)  
+       {  
+           std::wstring keyName = {};  
+           std::wstring flags = {};  
+           std::wstring cache = {};
 
+           // if (!IsUserBoundKeyLoaded())
+           {
+               veil::vtl1::implementation::enclave_load_user_bound_key(keyName, flags, cache); // Ensure correct overload is called  
+           }
+       }  
+   }  
+}

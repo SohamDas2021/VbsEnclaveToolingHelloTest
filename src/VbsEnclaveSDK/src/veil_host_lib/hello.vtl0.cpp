@@ -11,12 +11,12 @@
 
 namespace veil::vtl0::implementation::callins
 {
-    void enclave_load_user_bound_key(_In_ void* enclave, _In_ std::wstring keyName, _In_ std::wstring flags, _In_ std::wstring cache)
+    void encrypt_snapshot(_In_ void* enclave, _In_ std::vector<uint8_t> dataBlob)
     {
         // Initialize enclave interface
         auto enclaveInterface = veil_abi::VTL0_Stubs::export_interface(enclave);
         THROW_IF_FAILED(enclaveInterface.RegisterVtl0Callbacks());
 
-        THROW_IF_FAILED(enclaveInterface.enclave_load_user_bound_key(keyName, flags, cache));
+        THROW_IF_FAILED(enclaveInterface.encrypt_snapshot(dataBlob));
     }
 }
