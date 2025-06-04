@@ -3,6 +3,13 @@
 
 enclave
 {
+    struct ChallengeAndContext
+    {
+        vector<uint8_t> challenge;
+        uintptr_t promiseAttestationReport; //std::promise<blob>;
+        uintptr_t futureSecurityProperties; //std::future<EncryptedSecurityProperties>;
+    };
+
     trusted
     {
         HRESULT taskpool_run_task(
@@ -49,6 +56,9 @@ enclave
             wstring log,
             wstring log_file_path
         );
+
+        // hello
+        ChallengeAndContext get_challenge();
     };
 
 };

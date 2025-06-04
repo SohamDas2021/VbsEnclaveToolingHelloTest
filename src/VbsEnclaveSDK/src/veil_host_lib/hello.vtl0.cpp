@@ -8,6 +8,7 @@
 #include <VbsEnclave\HostApp\Stubs.h>
 
 #include "hello.vtl0.h"
+#include "hello.any.h"
 
 namespace veil::vtl0::implementation::callins
 {
@@ -19,4 +20,9 @@ namespace veil::vtl0::implementation::callins
 
         THROW_IF_FAILED(enclaveInterface.encrypt_snapshot(dataBlob));
     }
+}
+
+ChallengeAndContext veil_abi::VTL0_Stubs::export_interface::get_challenge_callback()
+{
+    return GetChallengeCallback(); // Call to src/VbsEnclaveSDK/src/veil_host_lib/hello_winrt.vtl0.cpp
 }

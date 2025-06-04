@@ -14,9 +14,9 @@ namespace veil::vtl1::implementation
 {
     void enclave_load_user_bound_key(const std::wstring& /*keyName*/, const std::wstring& /*flags*/, const std::wstring& /*cache*/)
     {
-        /*
-        NewClass::GetChallengeCallback();
+        auto challenge = veil_abi::VTL0_Callbacks::get_challenge_callback();
 
+        /*
         BCryptGenerateRandomKeyPair();
 
         GetAttestationReport();
